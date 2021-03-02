@@ -4,13 +4,17 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'sqlite3'
 
+def get_db
+	return SQLite3::Database.new 'barbershop.db'
+end
+
 configure do
-	@db = SQLite3::Database.new 'barbershop.db'
-	@db.execute 'CREATE TABLE IF NOT EXISTS
+	db = get_db
+	db.execute 'CREATE TABLE IF NOT EXISTS
 		"Users" 
 		(
 			"id" INTEGER PRIMARY KEY AUTOINCREMENT, 
-			"name" TEXT, 
+			"username" TEXT, 
 			"phone" TEXT, 
 			"datestamp" TEXT, 
 			"barber" TEXT, 
@@ -53,6 +57,18 @@ post '/visit' do
 		
 	end
 
+	db = get_db
+	db.execute 'INSERT INTO 
+	Users
+	(
+		username,
+		phone,
+		datestamp,
+		barber,
+		color
+	)
+	VALUES (?, ?, ?, ?, ?)', [@user_name, @phone, @date_time, @barbers, @color]
+
 	erb "Дорогой #{@user_name}, вы записались #{@date_time} к парикмахеру #{@barbers} цвет волос: #{@color}"
 
 	# f = File.open './public/users.txt', 'a'
@@ -77,26 +93,27 @@ post '/contacts' do
 	f.write "Email: #{@your_email}, Text: #{@your_textarea}"+"\n\r"
 	f.close
 
-	require 'pony'
-	Pony.mail(
-	   :name => params[:name],
-	  :mail => params[:mail],
-	  :body => params[:body],
-	  :to => 'a_lumbee@gmail.com',
-	  :subject => params[:name] + " has contacted you",
-	  :body => params[:message],
-	  :port => '587',
-	  :via => :smtp,
-	  :via_options => { 
-	    :address              => 'smtp.gmail.com', 
-	    :port                 => '587', 
-	    :enable_starttls_auto => true, 
-	    :user_name            => 'lumbee', 
-	    :password             => 'p@55w0rd', 
-	    :authentication       => :plain, 
-	    :domain               => 'localhost.localdomain'
-	  })
-	redirect '/success' 
+	# require 'pony'
+	# Pony.mail(
+	#    :name => params[:name],
+	#   :mail => params[:mail],
+	#   :body => params[:body],
+	#   :to => 'a_lumbee@gmail.com',
+	#   :subject => params[:name] + " has contacted you",
+	#   :body => params[:message],
+	#   :port => '587',
+	#   :via => :smtp,
+	#   :via_options => { 
+	#     :address              => 'smtp.gmail.com', 
+	#     :port                 => '587', 
+	#     :enable_starttls_auto => true, 
+	#     :user_name            => 'xxx', 
+	#     :password             => 'xxxxxxx', 
+	#     :authentication       => :plain, 
+	#     :domain               => 'localhost.localdomain'
+	#   })
+	# redirect '/success' 
 
 	erb :message
 end
+
