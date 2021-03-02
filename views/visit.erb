@@ -22,9 +22,9 @@
  	<div class="form-group">
  		<label>Выберите парикмахера</label>
 		<select name="barbers" class="form-control">
-			<option>Walter White</option>
-			<option>Jessie Pinkman</option>
-			<option>Gus Fring</option>
+			<option <%= @barbers == 'Walter White' ? 'selected' : '' %>>Walter White</option>
+			<option <%= @barbers == 'Jessie Pinkman' ? 'selected' : '' %>>Jessie Pinkman</option>
+			<option <%= @barbers == 'Gus Fring' ? 'selected' : '' %>>Gus Fring</option>
 		</select>
 	</div>
 
