@@ -5,7 +5,8 @@ require 'sinatra/reloader'
 require 'sqlite3'
 
 def get_db
-	return SQLite3::Database.new 'barbershop.db'
+	db = SQLite3::Database.new 'barbershop.db'
+	db.results_as_hash = true
 end
 
 configure do
@@ -117,3 +118,6 @@ post '/contacts' do
 	erb :message
 end
 
+get '/showusers' do
+  erb "Hello World"
+end
