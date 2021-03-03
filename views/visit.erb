@@ -3,6 +3,13 @@
 </h2>
 <p>На этой странице вы можете записаться к нам в Barber Shop</p>
 
+<script type="text/javascript">
+    $(function(){
+      $('#color').simplecolorpicker();
+      $('#datetimepicker').datetimepicker();
+    });
+</script> 
+
 <form action="/visit" method="POST">
   <div class="form-group">
     <label>Ваше имя</label>
@@ -16,7 +23,7 @@
 
     <div class="form-group">
     <label>Когда вас ждать?</label>
-    <input name="date_time" type="text" class="form-control" placeholder="Введите дату и время" value="<%=@date_time%>">
+    <input id='datetimepicker' name="date_time" type="text" class="form-control" placeholder="Введите дату и время" value="<%=@date_time%>">
  	</div>
 
  	<div class="form-group">
@@ -49,8 +56,3 @@
    <button type="submit" class="btn btn-primary">Записаться</button>
 </form>
 
-<script type="text/javascript">
-    $(function(){
-      $('#color').simplecolorpicker();
-    });
-</script> 
