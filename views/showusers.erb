@@ -1,0 +1,26 @@
+<table class="table">
+  <caption>Список записавшихся:</caption>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Имя</th>
+      <th>Телефон</th>
+      <th>Дата и время</th>
+      <th>Парикмахер</th>
+      <th>Цвет волос</th>
+    </tr>
+  </thead>
+  <tbody>
+  	<% @results.each do |row| %>
+    <tr>
+      <th scope="row"><%= row['id'] %></th>
+      <td><%= row['username'] %></td>
+      <td><%= row['phone'] %></td>
+      <td><%= row['datestamp'] %></td>
+      <td><%= row['barber'] %></td>
+      <td style="background-color: <%= row['color'] %>"><%= row['color'] %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+  
