@@ -29,9 +29,9 @@
  	<div class="form-group">
  		<label>Выберите парикмахера</label>
 		<select name="barbers" class="form-control">
-			<option <%= @barbers == 'Walter White' ? 'selected' : '' %>>Walter White</option>
-			<option <%= @barbers == 'Jessie Pinkman' ? 'selected' : '' %>>Jessie Pinkman</option>
-			<option <%= @barbers == 'Gus Fring' ? 'selected' : '' %>>Gus Fring</option>
+      <% @results_b.each do |row| %>
+  			<option <%= @barbers == row['name'] ? 'selected' : '' %>><%= row['name'] %></option>
+      <% end %>
 		</select>
 	</div>
 

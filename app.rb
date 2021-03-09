@@ -54,6 +54,8 @@ get '/about' do
 end
 
 get '/visit' do
+	db = get_db
+	@results_b = db.execute "SELECT * FROM Barbers" 
 	erb :visit
 end
 
@@ -142,7 +144,6 @@ end
 get '/showusers' do
 
   	db = get_db
-
   	@results = db.execute "SELECT * FROM Users order by id desc" 
 
 	erb :showusers
